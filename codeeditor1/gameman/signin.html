@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spider Monkey Login</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #3b0066, #001a66);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            overflow: hidden;
+            background-image: url(login.gif);
+            background-size: cover;
+            background-position: ce-nter;
+        }
+
+        .login-container {
+            background: linear-gradient(145deg, #2a004d, #001133);
+            border-radius: 15px;
+            padding: 40px;
+            width: 400px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7), 0 5px 10px rgba(128, 0, 255, 0.4);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: box-shadow 0.4s ease-in-out, transform 0.4s;
+        }
+
+        .login-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(128, 0, 255, 0.7), 0 10px 25px rgba(0, 0, 128, 0.4);
+        }
+
+        .login-container h1 {
+            color: #cc33ff;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 8px rgba(128, 0, 255, 0.7);
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+        .login-container h1:before {
+            content: '🕷️';
+            position: absolute;
+            left: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: #cc33ff;
+        }
+
+        .input-group {
+            width: 100%;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            background-color: #29004d;
+            border: none;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            background-color: #3b0066;
+            box-shadow: 0 8px 20px rgba(128, 0, 255, 0.5), 0 2px 6px rgba(0, 0, 128, 0.3);
+        }
+
+        .input-group .icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: #cc33ff;
+        }
+
+        button {
+            padding: 15px;
+            background-color: #9900cc;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1.1rem;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            text-shadow: 1px 1px 5px rgba(128, 0, 255, 0.6);
+            box-shadow: 0 4px 8px rgba(128, 0, 255, 0.5);
+        }
+
+        button:hover {
+            background-color: #cc33ff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(128, 0, 255, 0.5);
+        }
+
+        .error {
+            color: #ff6666;
+            font-size: 0.9rem;
+            margin-top: -10px;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                width: 90%;
+                padding: 20px;
+            }
+
+            .login-container h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Spider Monkey Login</h1>
+        <form action="/sign" method="POST" id="loginForm">
+            <div class="input-group">
+                <span class="icon">📧</span>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="input-group">
+                <span class="icon">🔒</span>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit">Sign In</button>
+            <div id="errorMsg" class="error"></div>
+        </form>
+    </div>
+
+    <script>
+    const form = document.getElementById('loginForm');
+    const errorMsg = document.getElementById('errorMsg');
+
+    form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        // Validation
+        if (!emailPattern.test(email)) {
+            errorMsg.textContent = 'Please enter a valid email address.';
+            return;
+        }
+
+        if (password.length < 6) {
+            errorMsg.textContent = 'Password must be at least 6 characters long.';
+            return;
+        }
+
+        errorMsg.textContent = '';
+
+        // Submit the form using fetch
+        try {
+            const response = await fetch('/sign', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const result = await response.json();
+            
+            if (response.ok) {
+                // Successful login; redirect to html.html
+                window.location.href = result.redirectUrl;
+            } else {
+                // Show the error message if login fails
+                errorMsg.textContent = result.message;
+            }
+        } catch (error) {
+            console.error("Error during login:", error);
+            errorMsg.textContent = "An error occurred. Please try again.";
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spider Monkey Registration</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #3b0066, #001a66); /* Violet to Dark Blue */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            overflow: hidden;
+            background-image: url("registration.gif");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .registration-container {
+            background: linear-gradient(145deg, #2a004d, #001133); /* Darker violet and blue */
+            border-radius: 15px;
+            padding: 40px;
+            width: 400px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7), 0 5px 10px rgba(128, 0, 255, 0.4); /* Violet shadow */
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: box-shadow 0.4s ease-in-out, transform 0.4s;
+        }
+
+        .registration-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(128, 0, 255, 0.7), 0 10px 25px rgba(0, 0, 128, 0.4); /* Updated shadows */
+        }
+
+        .registration-container h1 {
+            color: #cc33ff; /* Violet text */
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 8px rgba(128, 0, 255, 0.7); /* Violet glow */
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+        .input-group {
+            width: 100%;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            background-color: #29004d; /* Dark violet */
+            border: none;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            background-color: #3b0066; /* Violet */
+            box-shadow: 0 8px 20px rgba(128, 0, 255, 0.5), 0 2px 6px rgba(0, 0, 128, 0.3); /* Violet glow */
+        }
+
+        button {
+            padding: 15px;
+            background-color: #9900cc; /* Violet */
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1.1rem;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            text-shadow: 1px 1px 5px rgba(128, 0, 255, 0.6);
+            box-shadow: 0 4px 8px rgba(128, 0, 255, 0.5);
+        }
+
+        button:hover {
+            background-color: #cc33ff; /* Lighter violet */
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(128, 0, 255, 0.5); /* Violet hover effect */
+        }
+
+        .error {
+            color: #ff6666;
+            font-size: 0.9rem;
+            margin-top: -10px;
+        }
+
+        @media (max-width: 480px) {
+            .registration-container {
+                width: 90%;
+                padding: 20px;
+            }
+
+            .registration-container h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="registration-container">
+    <h1>Spider Monkey Registration</h1>
+    <form action="/submit-registration" method="POST" id="registrationForm">
+        <div class="input-group">
+            <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+        </div>
+        <div class="input-group">
+            <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+        </div>
+        <div class="input-group">
+            <input type="email" id="email" name="email" placeholder="Email" required>
+        </div>
+        <div class="input-group">
+            <input type="password" id="password" name="password" placeholder="Password" required>
+        </div>
+        <div class="input-group">
+            <input type="tel" id="mobile" name="mobile" placeholder="Mobile Number" required>
+        </div>
+        <button type="submit">Register</button>
+        <div id="errorMsg" class="error"></div>
+    </form>
+</div>
+
+<script>
+    const form = document.getElementById('registrationForm');
+    const errorMsg = document.getElementById('errorMsg');
+
+    form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const firstName = document.getElementById('firstName').value;
+        const lastName = document.getElementById('lastName').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const mobile = document.getElementById('mobile').value;
+
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const mobilePattern = /^[0-9]{10}$/;
+        const namePattern = /^[A-Za-z]+$/;
+
+        // Validation
+        if (!namePattern.test(firstName)) {
+            errorMsg.textContent = 'First Name must contain only letters.';
+            return;
+        }
+
+        if (!namePattern.test(lastName)) {
+            errorMsg.textContent = 'Last Name must contain only letters.';
+            return;
+        }
+
+        if (!emailPattern.test(email)) {
+            errorMsg.textContent = 'Please enter a valid email address.';
+            return;
+        }
+
+        if (!mobilePattern.test(mobile)) {
+            errorMsg.textContent = 'Mobile number must be 10 digits.';
+            return;
+        }
+
+        // If all validations pass, submit the form
+        const response = await fetch('/submit-registration', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                firstName,
+                lastName,
+                email,
+                password,
+                mobile
+            })
+        });
+
+        const result = await response.json();
+        errorMsg.textContent = result.message; // Display message from server response
+
+        if (response.ok) {
+            // Redirect to html.html if registration is successful
+            window.location.href = 'html.html'; // Redirect to html.html page
+        }
+    });
+</script>
+
+</body>
+</html>

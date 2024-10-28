@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tutorial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #2c3e50, #34495e);
+            color: #f2f2f2;
+        }
+        .content {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #1a1a1a;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            border-radius: 12px;
+        }
+
+        h1, h2 {
+            color: #4a90e2;
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #ddd;
+        }
+
+        /* Code Sample Styles */
+        .code-sample {
+            background-color: #2f2f2f;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            color: #c0c0c0;
+            border-left: 4px solid #4a90e2;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .code-sample:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Button Styles */
+        .dive-in-btn {
+            background-color: #4a90e2;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: bold;
+            transition: transform 0.3s, background-color 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .dive-in-btn:hover {
+            background-color: #357abd;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+        }
+    </style>
+</head>
+<body>
+
+<div class="content">
+    <h1>JavaScript Tutorial</h1>
+    <p>Welcome to the JavaScript tutorial. Here you’ll learn the basics of JavaScript programming with examples you can try yourself.</p>
+
+    <h2>Example 1: Hello World</h2>
+    <div class="code-sample">
+&lt;html&gt;<br>
+&lt;body&gt;<br>
+&lt;script&gt;<br>
+  alert('Hello, World!');<br>
+&lt;/script&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;
+    </div>
+    <a href="js.html" target="_blank" class="dive-in-btn">Dive In</a>
+
+    <h2>Example 2: Variables</h2>
+    <div class="code-sample">
+&lt;html&gt;<br>
+&lt;body&gt;<br>
+&lt;script&gt;<br>
+  var name = 'John';<br>
+  document.write('Hello, ' + name + '!');<br>
+&lt;/script&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;
+    </div>
+    <a href="js.html"class="dive-in-btn">Dive In</a>
+
+    <h2>Example 3: Functions</h2>
+    <div class="code-sample">
+&lt;html&gt;<br>
+&lt;body&gt;<br>
+&lt;script&gt;<br>
+  function greet() {<br>
+    alert('Welcome to JavaScript!');<br>
+  }<br>
+  greet();<br>
+&lt;/script&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;
+    </div>
+    <a href="https://jsfiddle.net/" target="_blank" class="dive-in-btn">Dive In</a>
+
+    <h2>Example 4: Conditional Statements</h2>
+    <div class="code-sample">
+&lt;html&gt;<br>
+&lt;body&gt;<br>
+&lt;script&gt;<br>
+  var age = 18;<br>
+  if (age >= 18) {<br>
+    document.write('You are an adult.');<br>
+  } else {<br>
+    document.write('You are a minor.');<br>
+  }<br>
+&lt;/script&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;
+    </div>
+    <a href="https://jsfiddle.net/" target="_blank" class="dive-in-btn">Dive In</a>
+
+    <h2>Example 5: Loops</h2>
+    <div class="code-sample">
+&lt;html&gt;<br>
+&lt;body&gt;<br>
+&lt;script&gt;<br>
+  for (var i = 1; i <= 5; i++) {<br>
+    document.write('Number: ' + i + '&lt;br&gt;');<br>
+  }<br>
+&lt;/script&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;
+    </div>
+    <a href="https://jsfiddle.net/" target="_blank" class="dive-in-btn">Dive In</a>
+
+    <h2>Example 6: Arrays</h2>
+    <div class="code-sample">
+&lt;html&gt;<br>
+&lt;body&gt;<br>
+&lt;script&gt;<br>
+  var fruits = ['Apple', 'Banana', 'Cherry'];<br>
+  for (var i = 0; i &lt; fruits.length; i++) {<br>
+    document.write(fruits[i] + '&lt;br&gt;');<br>
+  }<br>
+&lt;/script&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;
+    </div>
+    <a href="https://jsfiddle.net/" target="_blank" class="dive-in-btn">Dive In</a>
+
+    <h2>Example 7: Objects</h2>
+    <div class="code-sample">
+&lt;html&gt;<br>
+&lt;body&gt;<br>
+&lt;script&gt;<br>
+  var person = {<br>
+    firstName: 'John',<br>
+    lastName: 'Doe'<br>
+  };<br>
+  document.write(person.firstName + ' ' + person.lastName);<br>
+&lt;/script&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;
+    </div>
+    <a href="https://jsfiddle.net/" target="_blank" class="dive-in-btn">Dive In</a>
+
+    <h2>Example 8: Event Handling</h2>
+    <div class="code-sample">
+&lt;html&gt;<br>
+&lt;body&gt;<br>
+&lt;button onclick="alert('Button Clicked!')">Click Me</button><br>
+&lt;/body&gt;<br>
+&lt;/html&gt;
+    </div>
+    <a href="https://jsfiddle.net/" target="_blank" class="dive-in-btn">Dive In</a>
+
+    <h2>Example 9: DOM Manipulation</h2>
+    <div class="code-sample">
+&lt;html&gt;<br>
+&lt;body&gt;<br>
+&lt;div id="demo">&lt;/div&gt;<br>
+&lt;script&gt;<br>
+  document.getElementById("demo").innerHTML = "Hello, World!";<br>
+&lt;/script&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;
+    </div>
+    <a href="https://jsfiddle.net/" target="_blank" class="dive-in-btn">Dive In</a>
+
+    <h2>Example 10: Fetch API</h2>
+    <div class="code-sample">
+&lt;html&gt;<br>
+&lt;body&gt;<br>
+&lt;script&gt;<br>
+  fetch('https://api.example.com/data')<br>
+    .then(response =&gt; response.json())<br>
+    .then(data =&gt; {<br>
+      console.log(data);<br>
+    });<br>
+&lt;/script&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;
+    </div>
+    <a href="https://jsfiddle.net/" target="_blank" class="dive-in-btn">Dive In</a>
+
+</div>
+
+</body>
+</html>
